@@ -1,6 +1,7 @@
 package cz.mikk.mozilla.sumo.importer;
 
 import lombok.RequiredArgsConstructor;
+import nu.studer.java.util.OrderedProperties;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.IOException;
@@ -9,7 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
-import java.util.Properties;
 
 @RequiredArgsConstructor
 public class OutputWriter {
@@ -20,9 +20,8 @@ public class OutputWriter {
      * Write properties files for language.
      * @param childDirectory language name
      * @param files map of filename-properties
-     * @throws IOException if something goes wrong when creating the language output directory
      */
-    public void write(String childDirectory, Map<Path, Properties> files) {
+    public void write(String childDirectory, Map<Path, OrderedProperties> files) {
         try {
             Path writeDirectory = Files.createDirectories(Paths.get(outputDir.toString(), childDirectory));
             files.entrySet().forEach(entry -> {

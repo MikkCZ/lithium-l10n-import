@@ -1,14 +1,14 @@
 package cz.mikk.mozilla.sumo.importer.functions;
 
 import cz.mikk.mozilla.sumo.importer.structures.Pair;
+import nu.studer.java.util.OrderedProperties;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Properties;
 import java.util.function.Function;
 
-public class LoadProperties implements Function<Path, Pair<Properties, Path>> {
+public class LoadProperties implements Function<Path, Pair<OrderedProperties, Path>> {
 
     /**
      * Load properties from file.
@@ -16,8 +16,8 @@ public class LoadProperties implements Function<Path, Pair<Properties, Path>> {
      * @return pair of the properties and their source path
      */
     @Override
-    public Pair<Properties, Path> apply(Path path) {
-        Properties properties = new Properties();
+    public Pair<OrderedProperties, Path> apply(Path path) {
+        OrderedProperties properties = new OrderedProperties();
         try {
             properties.load(Files.newBufferedReader(path));
         } catch (IOException ignored) {

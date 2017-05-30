@@ -1,5 +1,6 @@
 package cz.mikk.mozilla.sumo;
 
+import nu.studer.java.util.OrderedProperties;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -110,12 +111,21 @@ public class MainTest {
         runMain();
 
         // Assert
-        assertPropertiesFile(Paths.get(outDir.toString(), "cs", "a.properties"), "a.string");
+        assertPropertiesFile(Paths.get(outDir.toString(), "cs", "a.properties"), "a.string", "second.string", "third.string", "fourth.string");
         assertPropertiesFile(Paths.get(outDir.toString(), "cs", "b.properties"), "b.string");
         assertPropertiesFile(Paths.get(outDir.toString(), "cs", REDUNDANT_FILE), "c.string");
 
         assertPropertiesFile(Paths.get(outDir.toString(), "pl", "b.properties"), "b.string");
         assertPropertiesFile(Paths.get(outDir.toString(), "pl", REDUNDANT_FILE), "d.string");
+    }
+
+    @Test
+    public void keepPropertiesOrder() throws Exception {
+        // Act
+        runMain();
+
+        // Assert
+        assertPropertiesFileInOrder(Paths.get(outDir.toString(), "cs", "a.properties"), "a.string", "second.string", "third.string", "fourth.string");
     }
 
     @Test
@@ -205,6 +215,12 @@ public class MainTest {
         Properties properties = new Properties();
         properties.load(Files.newBufferedReader(path));
         assertThat(properties.keySet(), containsInAnyOrder(keys));
+    }
+
+    private void assertPropertiesFileInOrder(Path path, String... keys) throws IOException {
+        OrderedProperties properties = new OrderedProperties();
+        properties.load(Files.newBufferedReader(path));
+        assertThat(properties.stringPropertyNames(), contains(keys));
     }
 
 }
