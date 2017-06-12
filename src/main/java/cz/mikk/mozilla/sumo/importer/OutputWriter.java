@@ -5,7 +5,7 @@ import nu.studer.java.util.OrderedProperties;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -27,7 +27,7 @@ public class OutputWriter {
             files.entrySet().forEach(entry -> {
                 Path outputFile = Paths.get(writeDirectory.toString(), FilenameUtils.getName(entry.getKey().toString()));
                 try {
-                    entry.getValue().store(Files.newBufferedWriter(Files.createFile(outputFile), Charset.forName("UTF-8")), null);
+                    entry.getValue().store(Files.newBufferedWriter(Files.createFile(outputFile), StandardCharsets.UTF_8), null);
                 } catch (IOException e) {
                     System.err.printf("Error writing output to \"%s\".%n", outputFile);
                 }
