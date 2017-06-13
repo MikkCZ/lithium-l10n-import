@@ -4,3 +4,4 @@
 find . -type f -name "*.properties" -exec sed -i 's/\\:/\:/g' {} +
 find . -type f -name "*.properties" -exec sed -i 's/\\=/\=/g' {} +
 find . -type f -name "*.properties" -exec sed -i 's/\\!/\!/g' {} +
+find . -type f -name "*.properties" -exec sed -i 's/\\t/\t/g' {} +
