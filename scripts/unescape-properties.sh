@@ -6,5 +6,5 @@ find . -type f -name "*.properties" -exec sed -i 's/\\=/\=/g' {} +
 find . -type f -name "*.properties" -exec sed -i 's/\\!/\!/g' {} +
 find . -type f -name "*.properties" -exec sed -i 's/\\t/\t/g' {} +
 
-# escape colons in .properties keys
+# replace colons in .properties keys
 ./escape-input.sh
